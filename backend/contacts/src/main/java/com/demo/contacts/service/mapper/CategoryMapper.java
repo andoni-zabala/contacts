@@ -21,5 +21,4 @@ public class CategoryMapper extends ModelEntityMapper<Category, CategoryDto> {
 
         return dto;
     }
-
 }

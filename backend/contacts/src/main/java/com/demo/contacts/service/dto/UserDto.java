@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,4 +18,6 @@ public class UserDto extends ModelEntityDto<Long> {
     private String email;
     private String phoneNumber;
     private CategoryDto category;
+    private String notes;
+    private List<ChangeHistoryDto> changesHistory;
 }

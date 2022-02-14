@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category extends ModelEntity<Long>{
+public class Category extends ModelEntity<Long> {
 
     private String category;
 }

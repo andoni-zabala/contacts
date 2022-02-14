@@ -4,7 +4,8 @@ import com.demo.contacts.model.User;
 import com.demo.contacts.repository.ContactRepository;
 import com.demo.contacts.service.dto.UserDto;
 import com.demo.contacts.service.dto.PagedResultsDto;
-import com.demo.contacts.service.mapper.ContactMapper;
+import com.demo.contacts.service.mapper.UserMapper;
+
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,11 +22,11 @@ public class UserService {
     private ContactRepository repository;
 
     @Autowired
-    private ContactMapper mapper;
+    private UserMapper mapper;
 
     public PagedResultsDto<UserDto> getAllFiltered(String firstOrLastName, Pageable pageable) {
         Page<User> users = firstOrLastName.equals(Strings.EMPTY) ? repository.findAll(pageable) :
-                repository.getAllByFirstNameOrLastName(firstOrLastName, firstOrLastName, pageable);
+                repository.findAllByFirstNameOrLastName(firstOrLastName, firstOrLastName, pageable);
         List<UserDto> userDtos = users.getContent().stream().map(c -> mapper.toDto(c)).collect(Collectors.toList());
 
         return new PagedResultsDto<>(userDtos, users.getTotalElements(), users.getTotalPages());

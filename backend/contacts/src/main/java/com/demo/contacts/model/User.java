@@ -28,11 +28,12 @@ public class User extends ModelEntity<Long> {
     @NotNull
     private String phoneNumber;
 
-    @OneToOne
-    @JoinTable(name = "userCategory",
-            joinColumns =
-                    { @JoinColumn(name = "userId", referencedColumnName = "id") },
-            inverseJoinColumns =
-                    { @JoinColumn(name = "categoryId", referencedColumnName = "id") })
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Category category;
+
+    private String notes;
+
+    @OneToMany
+    private List<ChangeHistory> changesHistory;
+
 }
