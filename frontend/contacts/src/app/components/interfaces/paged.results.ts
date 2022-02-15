@@ -1,5 +1,7 @@
 export interface PagedResults<T> {
     results: T[];
-    totalResults: number;
+    pageIndex: number;
+    pageSize: number;
     totalPages: number;
+    totalResults: number;
 }

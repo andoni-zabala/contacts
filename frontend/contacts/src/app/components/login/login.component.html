@@ -1,18 +1,18 @@
 <div class="body">
     <div class="login">
         <form [formGroup]="form" (ngSubmit)="login()">
-            <img src="./assets/img/user.png" alt="login" width="30%">
-            <h1>Login</h1>
+            <img src="./assets/img/identity-card.png" alt="login" width="30%">
+            <h3>Login</h3>
             <mat-form-field appearance="fill" class="width">
-                <mat-label>User</mat-label>
-                <input matInput formControlName="user">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="user" autocomplete="off">
             </mat-form-field>
             <mat-form-field appearance="fill" class="width">
                 <mat-label>Password</mat-label>
-                <input matInput type="password" formControlName="password">
+                <input matInput type="password" formControlName="password" autocomplete="off">
             </mat-form-field>
             <br>
-            <button mat-raised-button color="primary" type="submit" class="form.invalid button-size">Login</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid"class="form.invalid button-size">Login</button>
         </form>
     </div>
 </div>

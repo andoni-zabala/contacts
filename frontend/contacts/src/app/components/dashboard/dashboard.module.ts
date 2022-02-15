@@ -7,13 +7,15 @@ import { DashboardComponent } from './dashboard.component';
 import { StartComponent } from './start/start.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UsersComponent } from './users/users.component';
+import { SaveUserComponent } from './users/save-user/save-user.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     StartComponent,
     NavbarComponent,
-    UsersComponent
+    UsersComponent,
+    SaveUserComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { PagedResults } from '../../interfaces/paged.results';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
@@ -10,20 +13,48 @@ import { UserService } from '../../services/user.service';
 })
 export class UsersComponent implements OnInit {
 
-  users!: PagedResults<User>;
-  displayedColumns: string[] = ['name', 'last_name', 'email', 'phone_number', 'category', 'actions'];
+  filter: string;
+  pageEvent: PageEvent;
+  pagedResults: PagedResults<User>;
+  dataSource: MatTableDataSource<User>;
+  pageSizeOptions = [5, 10, 25, 100];
+  displayedColumns: string[] = ['name', 'lastName', 'email', 'phoneNumber', 'category', 'actions'];
 
-  constructor(private userService: UserService) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private userService: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
 
-  getUsers() {
-    this.userService.getAllFiltered().subscribe({
-      next: users => {this.users = users},
-      error: err => { console.log(err)}
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event?: Event) {
+    let filterValue = (event?.target as HTMLInputElement).value.trim(); // TODO: Add spinner with boolean variable
+    this.getUsers(filterValue);
+  }
+
+  getUsers(filter?: string, pageIndex?: number, pageSize?: number) {
+    this.userService.getAllFiltered(filter, pageIndex, pageSize).subscribe({
+      next: users => {
+        this.pagedResults = users;
+        this.dataSource = new MatTableDataSource(this.pagedResults.results)
+      },
+      error: err => { console.log(err) }
     });
   }
 
+  deleteUser(id: number) {
+    this.userService.delete(id).subscribe({
+      next: () => {
+        this.getUsers();
+        this.snackBar.open('User deleted successfully', '', {
+          duration: 2000
+        })
+      }
+    });
+  }
 }

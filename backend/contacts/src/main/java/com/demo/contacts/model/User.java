@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
@@ -28,12 +30,12 @@ public class User extends ModelEntity<Long> {
     @NotNull
     private String phoneNumber;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     @Column(length = 200)
     private String notes;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true, fetch=FetchType.EAGER)
     private List<ChangeHistory> changesHistory;
 }

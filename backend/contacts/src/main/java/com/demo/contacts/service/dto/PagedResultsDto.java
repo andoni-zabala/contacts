@@ -14,6 +14,8 @@ import java.util.List;
 public class PagedResultsDto<TDto> {
 
     private List<TDto> results;
-    private Long totalResults;
+    private Integer pageIndex;
+    private Integer pageSize;
     private Integer totalPages;
+    private Long totalResults;
 }

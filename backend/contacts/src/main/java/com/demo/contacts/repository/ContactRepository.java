@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContactRepository extends ModelEntityRepository<User, Long> {
 
-    Page<User> findAllByFirstNameOrLastName(String firstName, String lastName, Pageable pageable);
+    Page<User> findAllByFirstNameContainingOrLastNameContaining(String firstName, String lastName, Pageable pageable);
 }

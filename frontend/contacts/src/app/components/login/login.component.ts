@@ -21,17 +21,18 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   login() { 
     if (this.form.value.user && this.form.value.password) { // TODO: improve login, jwt ?
+      localStorage.setItem('userLogged', this.form.value.user);
+
       this.openSnackBar(this.form.value.user);
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
   openSnackBar(user: string) {
-    this.matSnackBar.open('Welcome back ' + user, 'Close', {
-      duration: 2500,
+    this.matSnackBar.open('Welcome back ' + user + '!', 'x', {
+      duration: 2000,
       panelClass: ['my-snack-bar']
     });
   }

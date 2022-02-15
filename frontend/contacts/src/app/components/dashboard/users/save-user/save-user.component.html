@@ -1,0 +1,62 @@
+<div class="container">
+    <mat-toolbar>
+        <span>Save User</span>
+    </mat-toolbar>
+
+    <mat-card>
+        <form [formGroup]="form" (ngSubmit)="addUser()">
+            <mat-grid-list cols="4" rowHeight="70px">
+                
+                <mat-grid-tile [colspan]="1" [rowspan]="1" > 
+                    <mat-form-field class="width" >
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="firstName">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="5"> 
+                   <img src="./assets/img/user.png" width="150">
+                </mat-grid-tile>
+
+                
+                <mat-grid-tile [colspan]="1" [rowspan]="1" > 
+                    <mat-form-field class="width" >
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastName">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" > 
+                    <mat-form-field class="width" >
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1"> 
+                    <mat-form-field class="width" >
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput formControlName="phoneNumber">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1" > 
+                    <mat-form-field class="width">
+                    <mat-label>Categoria</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1"> 
+                    <button type="submit" [disabled]="form.invalid"  mat-raised-button color="primary" style="margin-right:10px">Aceptar</button>
+                    <button mat-raised-button routerLink="/dashboard/users">Volver</button>
+                </mat-grid-tile>    
+            </mat-grid-list>
+            <br><br>
+        </form>
+    </mat-card>
+</div>
