@@ -31,9 +31,9 @@ public class User extends ModelEntity<Long> {
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Category category;
 
+    @Column(length = 200)
     private String notes;
 
     @OneToMany
     private List<ChangeHistory> changesHistory;
-
 }

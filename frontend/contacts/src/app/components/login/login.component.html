@@ -1,0 +1,18 @@
+<div class="body">
+    <div class="login">
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <img src="./assets/img/user.png" alt="login" width="30%">
+            <h1>Login</h1>
+            <mat-form-field appearance="fill" class="width">
+                <mat-label>User</mat-label>
+                <input matInput formControlName="user">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password">
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="primary" type="submit" class="form.invalid button-size">Login</button>
+        </form>
+    </div>
+</div>

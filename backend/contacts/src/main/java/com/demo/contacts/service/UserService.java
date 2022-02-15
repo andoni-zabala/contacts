@@ -27,8 +27,8 @@ public class UserService {
     public PagedResultsDto<UserDto> getAllFiltered(String firstOrLastName, Pageable pageable) {
         Page<User> users = firstOrLastName.equals(Strings.EMPTY) ? repository.findAll(pageable) :
                 repository.findAllByFirstNameOrLastName(firstOrLastName, firstOrLastName, pageable);
-        List<UserDto> userDtos = users.getContent().stream().map(c -> mapper.toDto(c)).collect(Collectors.toList());
 
+        List<UserDto> userDtos = users.getContent().stream().map(c -> mapper.toDto(c)).collect(Collectors.toList());
         return new PagedResultsDto<>(userDtos, users.getTotalElements(), users.getTotalPages());
     }
     public UserDto getById(Long id) {

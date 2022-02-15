@@ -1,8 +1,15 @@
 CREATE SCHEMA `contact`;
 
 CREATE TABLE `contact`.`category` (id bigint not null auto_increment, category_type varchar(255) not null, primary key (id));
+
 CREATE TABLE `contact`.`user` (id bigint not null auto_increment, first_name varchar(255) not null, last_name varchar(255) not null, email varchar(255) not null,
-                        phone_number varchar(255) not null, category_id bigint, primary key (id));
+                        phone_number varchar(255) not null, notes varchar(200), category_id bigint, primary key (id));
+
+CREATE TABLE `contact`.`change_history` (id bigint not null auto_increment, date datetime, field varchar(255), new_value varchar(255),
+                                        old_value varchar(255), performed_by varchar(255), user_id bigint, primary key (id));
+
+CREATE TABLE `contact`.`user_changes_history` (user_id bigint not null, changes_history_id bigint not null)
+
 
 INSERT INTO `contact`.`category` (`id`, `category`) VALUES
     (1, 'FAMILY'), (2, 'FRIEND'), (3, 'WORK'), (4, 'ACQUAINTANCE'), (5, 'OTHER');
@@ -24,3 +31,9 @@ INSERT INTO `contact`.`user` (`id`, `first_name`, `last_name`, `email`, `phone_n
     (14, 'Martin', 'Trange', 'trangemartin@gmail.com' ,'4343434', NULL, NULL),
     (15, 'Satoshi', 'Nakamoto', 'satoshi@gmail.com', '434335353', NULL, NULL),
     (16, 'Donna', 'Sein', 'donnasein@gmail.com' ,'4343434', NULL, NULL);
+
+INSERT INTO `contact`.`change_history` (`id`, `date`, `field`, `new_value`, `old_value`, `performed_by`, user_id) VALUES
+    (1, '2022-01-01 13:24:10', 'name', 'Martin', 'Jhon', 'Thomas Carlson', 1),
+    (2, '2022-01-13 18:29:10', 'last name', 'Martin', 'Jhon', 'Thomas Carlson', 1),
+    (3, '2022-01-24 21:25:10', 'name', 'Martin', 'Jhon', 'Thomas Carlson', 1),
+    (4, '2022-01-25 23:24:10', 'name', 'Martin', 'Jhon', 'Thomas Carlson', 1);

@@ -20,7 +20,6 @@ public class ChangeHistory extends ModelEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     private String field;
     private String oldValue;
     private String newValue;

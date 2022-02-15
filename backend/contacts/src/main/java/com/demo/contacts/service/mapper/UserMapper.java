@@ -22,7 +22,7 @@ public class UserMapper extends ModelEntityMapper<User, UserDto> {
 
         model.setFirstName(dto.getFirstName());
         model.setLastName(dto.getLastName());
-        model.setEmail(dto.getPhoneNumber());
+        model.setEmail(dto.getEmail());
         model.setPhoneNumber(dto.getPhoneNumber());
         model.setCategory(categoryMapper.toModel(dto.getCategory()));
         model.setNotes(dto.getNotes());
@@ -35,7 +35,7 @@ public class UserMapper extends ModelEntityMapper<User, UserDto> {
 
         dto.setFirstName(model.getFirstName());
         dto.setLastName(model.getLastName());
-        dto.setEmail(model.getPhoneNumber());
+        dto.setEmail(model.getEmail());
         dto.setPhoneNumber(model.getPhoneNumber());
         if (model.getCategory() != null) {
             dto.setCategory(categoryMapper.toDto(model.getCategory()));
