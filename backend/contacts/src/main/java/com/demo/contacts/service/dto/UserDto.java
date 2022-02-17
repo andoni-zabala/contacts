@@ -18,6 +18,5 @@ public class UserDto extends ModelEntityDto<Long> {
     private String email;
     private String phoneNumber;
     private CategoryDto category;
-    private String notes;
     private List<ChangeHistoryDto> changesHistory;
 }

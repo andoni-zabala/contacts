@@ -1,7 +1,7 @@
 package com.demo.contacts.service;
 
 import com.demo.contacts.model.User;
-import com.demo.contacts.repository.ContactRepository;
+import com.demo.contacts.repository.UserRepository;
 import com.demo.contacts.service.dto.UserDto;
 import com.demo.contacts.service.dto.PagedResultsDto;
 import com.demo.contacts.service.mapper.UserMapper;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     @Autowired
-    private ContactRepository repository;
+    private UserRepository repository;
 
     @Autowired
     private UserMapper mapper;
@@ -31,13 +31,19 @@ public class UserService {
         List<UserDto> userDtos = users.getContent().stream().map(c -> mapper.toDto(c)).collect(Collectors.toList());
         return new PagedResultsDto<>(userDtos, users.getNumber(), users.getNumberOfElements(), users.getTotalPages() , users.getTotalElements());
     }
+
     public UserDto getById(Long id) {
         User User = repository.getById(id);
         return mapper.toDto(User);
     }
 
-    public UserDto save(User User) {
-        User savedContact = repository.save(User);
+    public UserDto getByEmail(String email) {
+        User user = repository.getByEmail(email);
+        return mapper.toDto(user);
+    }
+
+    public UserDto save(User user) {
+        User savedContact = repository.save(user);
         return mapper.toDto(savedContact);
     }
 

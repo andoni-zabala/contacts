@@ -18,6 +18,8 @@ public class UserMapper extends ModelEntityMapper<User, UserDto> {
     private ChangeHistoryMapper changeHistoryMapper;
 
     public User toModel(UserDto dto) {
+        if (dto == null) { return null; }
+
         User model = super.toModel(dto, User.class);
 
         model.setFirstName(dto.getFirstName());
@@ -25,12 +27,13 @@ public class UserMapper extends ModelEntityMapper<User, UserDto> {
         model.setEmail(dto.getEmail());
         model.setPhoneNumber(dto.getPhoneNumber());
         model.setCategory(categoryMapper.toModel(dto.getCategory()));
-        model.setNotes(dto.getNotes());
         model.setChangesHistory(dto.getChangesHistory().stream().map(ch -> changeHistoryMapper.toModel(ch)).collect(Collectors.toList()));
         return model;
     }
 
     public UserDto toDto(User model) {
+        if (model == null) { return null; }
+
         UserDto dto = super.toDto(model, UserDto.class);
 
         dto.setFirstName(model.getFirstName());
@@ -40,8 +43,9 @@ public class UserMapper extends ModelEntityMapper<User, UserDto> {
         if (model.getCategory() != null) {
             dto.setCategory(categoryMapper.toDto(model.getCategory()));
         }
-        dto.setNotes(model.getNotes());
-        dto.setChangesHistory(model.getChangesHistory().stream().map(ch -> changeHistoryMapper.toDto(ch)).collect(Collectors.toList()));
+        if (model.getChangesHistory() != null) {
+            dto.setChangesHistory(model.getChangesHistory().stream().map(ch -> changeHistoryMapper.toDto(ch)).collect(Collectors.toList()));
+        }
         return dto;
     }
 }

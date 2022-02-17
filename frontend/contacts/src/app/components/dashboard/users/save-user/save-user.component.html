@@ -1,6 +1,7 @@
 <div class="container">
     <mat-toolbar>
-        <span>Save User</span>
+        <span *ngIf="userToSave">Edit User</span>
+        <span *ngIf="!userToSave">Create User</span>
     </mat-toolbar>
 
     <mat-card>
@@ -29,7 +30,8 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1" > 
                     <mat-form-field class="width" >
                         <mat-label>Email</mat-label>
-                        <input matInput formControlName="email">
+                        <input matInput (focusout)="getUserByEmail()" formControlName="email">
+                        <mat-error *ngIf="emailAlreadyExists">Email already exists in the database</mat-error>
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -42,10 +44,10 @@
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1" > 
                     <mat-form-field class="width">
-                    <mat-label>Categoria</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{food.viewValue}}
+                    <mat-label>Category</mat-label>
+                        <mat-select [compareWith]="compareObjects" formControlName="category"x>
+                            <mat-option *ngFor="let category of categories" [value]="category">
+                                {{category.category}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SnackBarService } from '../services/snack.bar.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private matSnackBar: MatSnackBar, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private snackBarService: SnackBarService, private router: Router) {
     this.form = this.formBuilder.group({
       user: ['', Validators.required],
       password:  ['', Validators.required]
@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
   }
 
   openSnackBar(user: string) {
-    this.matSnackBar.open('Welcome back ' + user + '!', 'x', {
+    this.snackBarService.openSnackBar('Welcome back ' + user + '!', {
       duration: 2000,
       panelClass: ['my-snack-bar']
-    });
+    })
   }
 }

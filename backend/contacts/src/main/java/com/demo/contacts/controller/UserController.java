@@ -33,9 +33,15 @@ public class UserController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
+    @GetMapping("by-email/{email}")
+    public ResponseEntity<UserDto> getByEmail(@PathVariable String email) {
+        UserDto userDto = service.getByEmail(email);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
     @PostMapping
-    public ResponseEntity<UserDto> save(@RequestBody User contact) {
-        UserDto savedUser = service.save(contact);
+    public ResponseEntity<UserDto> save(@RequestBody User user) {
+        UserDto savedUser = service.save(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

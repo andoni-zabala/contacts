@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { PagedResults } from '../../interfaces/paged.results';
 import { User } from '../../interfaces/user';
+import { SnackBarService } from '../../services/snack.bar.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -22,10 +23,11 @@ export class UsersComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar) { }
+  constructor(private userService: UserService, private snackBarService: SnackBarService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.setUsers();
   }
 
   ngAfterViewInit() {
@@ -34,11 +36,11 @@ export class UsersComponent implements OnInit {
 
   applyFilter(event?: Event) {
     let filterValue = (event?.target as HTMLInputElement).value.trim(); // TODO: Add spinner with boolean variable
-    this.getUsers(filterValue);
+    this.setUsers(filterValue);
   }
 
-  getUsers(filter?: string, pageIndex?: number, pageSize?: number) {
-    this.userService.getAllFiltered(filter, pageIndex, pageSize).subscribe({
+  setUsers(filter?: string, pageIndex?: number, pageSize?: number) {
+    this.userService.getAllFiltered$(filter, pageIndex, pageSize).subscribe({
       next: users => {
         this.pagedResults = users;
         this.dataSource = new MatTableDataSource(this.pagedResults.results)
@@ -50,11 +52,13 @@ export class UsersComponent implements OnInit {
   deleteUser(id: number) {
     this.userService.delete(id).subscribe({
       next: () => {
-        this.getUsers();
-        this.snackBar.open('User deleted successfully', '', {
-          duration: 2000
-        })
+        this.setUsers();
+        this.snackBarService.openSnackBar('User deleted successfully', { duration: 2000});
       }
     });
+  }
+
+  editUser(user?: User) {
+    this.router.navigate(['/dashboard/save-user'], { queryParams: { userToEdit: user } }  ); 
   }
 }

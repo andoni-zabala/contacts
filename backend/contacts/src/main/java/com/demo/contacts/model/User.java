@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.OnDelete;
+import org.hibernate.Hibernate;
 
-import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -33,9 +33,19 @@ public class User extends ModelEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @Column(length = 200)
-    private String notes;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private List<ChangeHistory> changesHistory;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
