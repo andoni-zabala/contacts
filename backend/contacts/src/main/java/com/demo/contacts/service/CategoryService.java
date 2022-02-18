@@ -1,7 +1,6 @@
 package com.demo.contacts.service;
 
 import com.demo.contacts.model.Category;
-import com.demo.contacts.model.User;
 import com.demo.contacts.repository.CategoryRepository;
 import com.demo.contacts.service.dto.CategoryDto;
 import com.demo.contacts.service.mapper.CategoryMapper;

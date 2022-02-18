@@ -30,10 +30,10 @@ public class User extends ModelEntity<Long> {
     @NotNull
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<ChangeHistory> changesHistory;
 
     @Override
@@ -42,6 +42,7 @@ public class User extends ModelEntity<Long> {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
         return id != null && Objects.equals(id, user.id);
+
     }
 
     @Override

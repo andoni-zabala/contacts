@@ -34,7 +34,7 @@ public class UserService implements ModelEntityService<Long, User, UserDto> {
 
     @Override
     public UserDto getById(Long id) {
-        User user = repository.getById(id);
+        User user = repository.findById(id).orElse(new User());
         return mapper.toDto(user);
     }
 

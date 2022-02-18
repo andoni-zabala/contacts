@@ -51,7 +51,15 @@ INSERT INTO `contact`.`user` (`id`, `first_name`, `last_name`, `email`, `phone_n
     (35, 'Martin', 'Celia', 'celia_martin@gmail.com', '749134354', NULL);
 
 INSERT INTO `contact`.`change_history` (`id`, `date`, `field`, `new_value`, `old_value`, `performed_by`, user_id) VALUES
-    (1, '2022-01-01 13:24:10', 'name', 'Martin', 'Jhon', 'Thomas Carlson', 1),
-    (2, '2022-01-13 18:29:10', 'last name', 'Martin', 'Jhon', 'Thomas Carlson', 1),
-    (3, '2022-01-24 21:25:10', 'name', 'Martin', 'Jhon', 'Thomas Carlson', 1),
-    (4, '2022-01-25 23:24:10', 'name', 'Martin', 'Jhon', 'Thomas Carlson', 1);
+    (1, '2022-01-01 13:24:10', 'firstName', 'Martin', 'Jhon', 'Thomas Carlson', 1),
+    (2, '2022-01-13 18:29:10', 'lastName', 'Martin', 'Jhon', 'Thomas Carlson', 25),
+    (3, '2022-01-24 21:25:10', 'lastName', 'Martin', 'Jhon', 'Thomas Carlson', 1),
+    (4, '2022-01-25 23:24:10', 'lastName', 'Elizabeth', 'Ludmila', 'Brian Beitia', 2),
+    (5, '2022-01-01 13:24:10', 'firstName', 'Connor', 'Jhon', 'Satoshi Nakamoto', 3),
+    (6, '2022-01-13 18:29:10', 'firstName', 'Martin', 'Jhon', 'Annabella Sein', 1),
+    (7, '2022-01-24 21:25:10', 'firstName', 'Martin', 'Jhon', 'Thomas Carlson', 7),
+    (8, '2022-01-25 23:24:10', 'email', 'Martin', 'Jhon', 'Thomas Carlson', 8),
+    (9, '2022-01-01 13:24:10', 'email', 'Martin', 'Jhon', 'Elizabeth Policella', 7),
+    (10, '2022-01-13 18:29:10', 'phoneNumber', 'Martin', 'Jhon', 'Thomas Carlson', 4),
+    (11, '2022-01-24 21:25:10', 'phoneNumber', 'Martin', 'Jhon', 'Juan Bruno', 5),
+    (12, '2022-01-25 23:24:10', 'phoneNumber', 'Martin', 'Jhon', 'Juan Bruno', 2);
