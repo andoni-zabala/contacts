@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements ModelEntityService<Long, User, UserDto> {
 
     @Autowired
     private UserRepository repository;
@@ -32,9 +32,10 @@ public class UserService {
         return new PagedResultsDto<>(userDtos, users.getNumber(), users.getNumberOfElements(), users.getTotalPages() , users.getTotalElements());
     }
 
+    @Override
     public UserDto getById(Long id) {
-        User User = repository.getById(id);
-        return mapper.toDto(User);
+        User user = repository.getById(id);
+        return mapper.toDto(user);
     }
 
     public UserDto getByEmail(String email) {
@@ -42,11 +43,13 @@ public class UserService {
         return mapper.toDto(user);
     }
 
+    @Override
     public UserDto save(User user) {
-        User savedContact = repository.save(user);
-        return mapper.toDto(savedContact);
+        User savedUser = repository.save(user);
+        return mapper.toDto(savedUser);
     }
 
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
